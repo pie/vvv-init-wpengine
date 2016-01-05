@@ -1,6 +1,6 @@
 #!/bin/bash
 # Just a human readable description of this site
-SITE_NAME="Site Name"
+SITE_NAME="site-name"
 # The name (to be) used by MySQL for the DB
 DB_NAME="site-name"
 # Values for searching and replacing

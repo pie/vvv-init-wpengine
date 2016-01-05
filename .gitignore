@@ -4,7 +4,7 @@ package
 ## START WordPress show/ignore
 ## So we don't get the core files in git
 
-# DO ignore htdocs…
+# DO ignore public_html…
 public_html/*.*
 public_html/*/*
 

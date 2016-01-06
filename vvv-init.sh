@@ -81,7 +81,7 @@ fi
 # Let's get some config in the house
 if [ ! -f public_html/wp-config.php ]; then
 	echo "Creating wp-config.php and moving it up into public_html because we like it there"
-	wp core config --dbname="$DB_NAME" --dbuser=wp --dbpass=wp --dbhost="localhost" --extra-php <<PHP
+	wp core config --allow-root --dbname="$DB_NAME" --dbuser=wp --dbpass=wp --dbhost="localhost" --extra-php <<PHP
 	define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/wp-content' );
 	define( 'WP_CONTENT_URL', '$SITE_URL/wp-content' );
 	define( 'WP_DEBUG', true );
@@ -132,12 +132,12 @@ if [ "" == "$DATA_IN_DB" ]; then
 	if [ -f $DB_NAME.sql ]; then
 		echo "Importing DB content from dump file"
 
-		wp db import $DB_NAME.sql
-		wp search-replace "$SEARCHDOMAIN" "$REPLACEDOMAIN"
+		wp db import --allow-root $DB_NAME.sql
+		wp search-replace --allow-root "$SEARCHDOMAIN" "$REPLACEDOMAIN"
 	elif ! $(wp core is-installed ); then
 		echo "Installing initial WordPress DB tables"
-		wp core install --title=$SITE_NAME --admin_user=admin --admin_password=password --admin_email=admin@no.reply
-		wp option update siteurl "$SITE_URL\/wp"
+		wp core install --allow-root --title=$SITE_NAME --admin_user=admin --admin_password=password --admin_email=admin@no.reply
+		wp option update --allow-root siteurl "$SITE_URL\/wp"
 
 	fi
 else

@@ -122,7 +122,7 @@
 
 	# This project doesn't include WP core in version control or in Composer
 	echo "Downloading the latest core WordPress files…"
-	wp core download --path=public_html
+	wp core download --allow-root --path=public_html
 	if [ 0 != $? ]; then
 		echo -e "${RED}We could not download the WordPress core files.${NC}"
 		exit 9

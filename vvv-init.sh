@@ -6,6 +6,8 @@ DB_NAME="site-name"
 # Values for searching and replacing
 SEARCHDOMAIN="site-name.wpengine.com"
 REPLACEDOMAIN="local.site-name"
+# Site URL
+SITE_URL="http://local.site-name"
 # Wordpress multisite network (true/false)
 MULTISITE=false
 # Append additional config to wp-config.php
@@ -67,7 +69,7 @@ if $MULTISITE; then
 	define('WP_ALLOW_MULTISITE', true);
 	//define('MULTISITE', true);
 	//define('SUBDOMAIN', true);
-	//define('DOMAIN_CURRENT_SITE', '$REPLACEDOMAIN');
+	//define('DOMAIN_CURRENT_SITE', '$SITE_URL');
 	//define('PATH_CURRENT_SITE', '/');
 	//define('SITE_ID_CURRENT_SITE', 1);
 	//define('BLOG_ID_CURRENT_SITE', 1);
@@ -83,7 +85,7 @@ if [ ! -f public_html/wp-config.php ]; then
 	echo "Creating wp-config.php and moving it up into public_html because we like it there"
 	wp core config --allow-root --dbname="$DB_NAME" --dbuser=wp --dbpass=wp --dbhost="localhost" --extra-php <<PHP
 	define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/wp-content' );
-	define( 'WP_CONTENT_URL', '$REPLACEDOMAIN/wp-content' );
+	define( 'WP_CONTENT_URL', '$SITE_URL/wp-content' );
 	define( 'WP_DEBUG', true );
 	define( 'WP_DEBUG_LOG', true );
 	define('WP_DEBUG_DISPLAY', false);
@@ -137,7 +139,7 @@ if [ "" == "$DATA_IN_DB" ]; then
 	elif ! $(wp core is-installed ); then
 		echo "Installing initial WordPress DB tables"
 		wp core install --allow-root --title=$SITE_NAME --admin_user=admin --admin_password=password --admin_email=admin@no.reply
-		wp option update --allow-root siteurl "$REPLACEDOMAIN\/wp"
+		wp option update --allow-root siteurl "$SITE_URL\/wp"
 
 	fi
 else

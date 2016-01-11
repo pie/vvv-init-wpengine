@@ -84,12 +84,14 @@ fi
 if [ ! -f public_html/wp-config.php ]; then
 	echo "Creating wp-config.php and moving it up into public_html because we like it there"
 	wp core config --allow-root --dbname="$DB_NAME" --dbuser=wp --dbpass=wp --dbhost="localhost" --extra-php <<PHP
-	define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/wp-content' );
-	define( 'WP_CONTENT_URL', '$SITE_URL/wp-content' );
-	define( 'WP_DEBUG', true );
-	define( 'WP_DEBUG_LOG', true );
-	define('WP_DEBUG_DISPLAY', false);
-	define('SAVEQUERIES', true);
+define( 'WP_HOME', "http://local.$SITE_NAME" );
+define( 'WP_SITEURL', "http://local.$SITE_NAME/wp" );
+define( 'WP_CONTENT_DIR', dirname( __FILE__ ) . '/wp-content' );
+define( 'WP_CONTENT_URL', "http://local.$SITE_NAME/wp-content" );
+define( 'WP_DEBUG', true );
+define( 'WP_DEBUG_LOG', true );
+define('WP_DEBUG_DISPLAY', false);
+define('SAVEQUERIES', true);
 $EXTRA_CONFIG
 $MULTISITE_CONFIG
 PHP

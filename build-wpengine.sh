@@ -118,13 +118,12 @@
 	if [ -d "$PACKAGE" ]; then
 	    rm -rf $PACKAGE/*
 	else
-		mkdir $PACKAGE
+	    mkdir $PACKAGE
 	fi
 
 	cd $PACKAGE
 	git init
-	git remote add origin git@git.wpengine.com:staging/$SITENAME.git
-	git remote rename origin staging
+	git remote add staging git@git.wpengine.com:staging/$SITENAME.git
 	git remote add production git@git.wpengine.com:production/$SITENAME.git
 
 	echo "Beginning the build…"

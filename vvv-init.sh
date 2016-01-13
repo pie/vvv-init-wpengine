@@ -26,15 +26,15 @@ echo "Commencing $SITE_NAME setup"
 
 # Pull wpengine site into it's own temp dir
 echo -e "${GREEN}Pulling down live site${NC}"
-git clone git@git.wpengine.com:production/$site_name.git $site_name/temp_prod
+git clone git@git.wpengine.com:production/$SITE_NAME.git /vagrant/www/$SITE_NAME/temp_prod
 
 # Grab production site's content
-mkdir $site_name/public_html
-mkdir $site_name/public_html/wp-content
-rsync -r $site_name/temp_prod/wp-content $site_name/public_html
+mkdir /vagrant/www/$SITE_NAME/public_html
+mkdir /vagrant/www/$SITE_NAME/public_html/wp-content
+rsync -r /vagrant/www/$SITE_NAME/temp_prod/wp-content /vagrant/www/$SITE_NAME/public_html
 
 # Delete wpengine temp directory
-rm -rf $site_name/temp_prod
+rm -rf /vagrant/www/$SITE_NAME/temp_prod
 
 # Add GitHub and GitLab to known_hosts, so we don't get prompted
 # to verify the server fingerprint.

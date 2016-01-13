@@ -24,17 +24,21 @@ NC='\033[0m' # No Color
 echo "---------------------------"
 echo "Commencing $SITE_NAME setup"
 
-# Pull wpengine site into it's own temp dir
-echo -e "${GREEN}Pulling down live site${NC}"
-sudo git clone git@git.wpengine.com:production/$SITE_NAME.git /vagrant/www/$SITE_NAME/temp_prod
+if [ ! -d "/vagrant/$SITE_NAME/public_html" ]; then
 
-# Grab production site's content
-mkdir /vagrant/www/$SITE_NAME/public_html
-mkdir /vagrant/www/$SITE_NAME/public_html/wp-content
-rsync -r /vagrant/www/$SITE_NAME/temp_prod/wp-content /vagrant/www/$SITE_NAME/public_html
+	# Pull wpengine site into it's own temp dir
+	echo -e "${GREEN}Pulling down live site${NC}"
+	sudo git clone git@git.wpengine.com:production/$SITE_NAME.git /vagrant/www/$SITE_NAME/temp_prod
 
-# Delete wpengine temp directory
-rm -rf /vagrant/www/$SITE_NAME/temp_prod
+	# Grab production site's content
+	mkdir /vagrant/www/$SITE_NAME/public_html
+	mkdir /vagrant/www/$SITE_NAME/public_html/wp-content
+	rsync -r /vagrant/www/$SITE_NAME/temp_prod/wp-content /vagrant/www/$SITE_NAME/public_html
+
+	# Delete wpengine temp directory
+	rm -rf /vagrant/www/$SITE_NAME/temp_prod
+
+fi
 
 # Add GitHub and GitLab to known_hosts, so we don't get prompted
 # to verify the server fingerprint.

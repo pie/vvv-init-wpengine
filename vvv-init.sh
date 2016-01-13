@@ -14,12 +14,27 @@ MULTISITE=false
 EXTRA_CONFIG="
 // No extra config, but if there was it would go here.
 "
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+NC='\033[0m' # No Color
 
 # ----------------------------------------------------------------
 # You should not need to edit below this point. Famous last words.
 
 echo "---------------------------"
 echo "Commencing $SITE_NAME setup"
+
+# Pull wpengine site into it's own temp dir
+echo -e "${GREEN}Pulling down live site${NC}"
+git clone git@git.wpengine.com:production/$site_name.git $site_name/temp_prod
+
+# Grab production site's content
+mkdir $site_name/public_html
+mkdir $site_name/public_html/wp-content
+rsync -r $site_name/temp_prod/wp-content $site_name/public_html
+
+# Delete wpengine temp directory
+rm -rf $site_name/temp_prod
 
 # Add GitHub and GitLab to known_hosts, so we don't get prompted
 # to verify the server fingerprint.

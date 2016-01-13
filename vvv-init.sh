@@ -1,13 +1,13 @@
 #!/bin/bash
 # Just a human readable description of this site
-SITE_NAME="site-name"
+SITE_NAME="joeydeploy"
 # The name (to be) used by MySQL for the DB
-DB_NAME="site-name"
+DB_NAME="joeydeploy"
 # Values for searching and replacing
-SEARCHDOMAIN="site-name.wpengine.com"
-REPLACEDOMAIN="local.site-name"
+SEARCHDOMAIN="joeydeploy.wpengine.com"
+REPLACEDOMAIN="local.joeydeploy"
 # Site URL
-SITE_URL="http://local.site-name"
+SITE_URL="http://local.joeydeploy"
 # Wordpress multisite network (true/false)
 MULTISITE=false
 # Append additional config to wp-config.php
@@ -26,7 +26,7 @@ echo "Commencing $SITE_NAME setup"
 
 # Pull wpengine site into it's own temp dir
 echo -e "${GREEN}Pulling down live site${NC}"
-git clone git@git.wpengine.com:production/$SITE_NAME.git /vagrant/www/$SITE_NAME/temp_prod
+sudo git clone git@git.wpengine.com:production/$SITE_NAME.git /vagrant/www/$SITE_NAME/temp_prod
 
 # Grab production site's content
 mkdir /vagrant/www/$SITE_NAME/public_html

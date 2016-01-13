@@ -5,7 +5,7 @@ You may want to [read our overview](https://github.com/cftp/vvv-init/wiki).
 ## Basic setup
 
 1. Add any required additional known hosts to ssh/known_hosts - these will be appended to the known_hosts file in your vagrant box
-2. Run a search and replace for `site-name` to whatever the subdomain for your development site will be
+2. Run a search and replace for `joeydeploy` to whatever the subdomain for your development site will be
 3. Run a search and replace for `search-name` to whatever the subdomain for your production site is. This will be used to replace domains in the database
 4. Run a search and replace for `site_name` to whatever the database name for your development site will be
 5. Run a search and replace for `Site Name` to whatever the human readable name for your development site will be
@@ -42,12 +42,12 @@ To get started:
 
 1. If you don't already have it, clone the [Vagrant repo](https://github.com/10up/varying-vagrant-vagrants/) (perhaps into your `~/Vagrants/` directory, you may need to create it if it doesn't already exist)
 2. Install the Vagrant hosts updater: `vagrant plugin install vagrant-hostsupdater`
-3. Clone this branch of this repo into the `www` directory of your Vagrant as `site-name`
+3. Clone this branch of this repo into the `www` directory of your Vagrant as `joeydeploy`
 4. If your Vagrant is running, from the Vagrant directory run `vagrant halt`
 5. Followed by `vagrant up --provision`.  Perhaps a cup of tea now? The initial provisioning may take a while.
 
 
 Then you can visit:
-* [http://local.site-name/](http://local.site-name/)
+* [http://local.joeydeploy/](http://local.joeydeploy/)
 
 This script is free software, and is released under the terms of the <abbr title="GNU General Public License">GPL</abbr> version 2 or (at your option) any later version. See license.txt.

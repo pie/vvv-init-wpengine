@@ -101,49 +101,59 @@
 	# BUILD THE PROJECT
 	# =================
 
-	echo "Creating a clean 'build' directory: git clone $INITIAL $INITIAL/build"
-	git clone $INITIAL "$INITIAL/build"
-	if [[ 0 != $? ]]; then
-		echo -e "${RED}Failed to clone the working Git repository${NC}"
-		exit 7
-	fi
+	#echo "Creating a clean 'build' directory: git clone $INITIAL $INITIAL/build"
+	#git clone $INITIAL "$INITIAL/build"
+	#if [[ 0 != $? ]]; then
+	#	echo -e "${RED}Failed to clone the working Git repository${NC}"
+	#	exit 7
+	#fi
+
 	echo "Creating a clean 'package' directory: git clone git@git.wpengine.com:production/$SITENAME.git $INITIAL/package"
-	git clone git@git.wpengine.com:production/$SITENAME.git "$INITIAL/package"
-	if [[ 0 != $? ]]; then
-		echo -e "${RED}Failed to clone the WPEngine Git repository${NC}"
-		exit 8
+	#sudo git clone git@git.wpengine.com:production/$SITENAME.git "$INITIAL/package"
+	#if [[ 0 != $? ]]; then
+	#	echo -e "${RED}Failed to clone the WPEngine Git repository${NC}"
+	#	exit 8
+	#fi
+
+	if [ -d "$PACKAGE" ]; then
+	    rm -rf $PACKAGE/*
+	else
+		mkdir $PACKAGE
 	fi
+
 	cd $PACKAGE
-	git remote rename origin production
-	git remote add staging git@git.wpengine.com:staging/$SITENAME.git
+	git init
+	git remote add origin git@git.wpengine.com:staging/$SITENAME.git
+	git remote rename origin staging
+	git remote add production git@git.wpengine.com:production/$SITENAME.git
 
 	echo "Beginning the build…"
-	cd $BUILD
+	#cd $BUILD
 
 	# This project doesn't include WP core in version control or in Composer
-	echo "Downloading the latest core WordPress files…"
-	wp core download --allow-root --path=public_html
-	if [ 0 != $? ]; then
-		echo -e "${RED}We could not download the WordPress core files.${NC}"
-		exit 9
-	fi
-	echo "Running Composer…"
+	#echo "Downloading the latest core WordPress files…"
+	#wp core download --allow-root --path=public_html
+	#if [ 0 != $? ]; then
+	#	echo -e "${RED}We could not download the WordPress core files.${NC}"
+	#	exit 9
+	#fi
+	#echo "Running Composer…"
 	# Preferring distribution, rather than source, should speed things up for WP.org
 	# hosted plugins, and those plugins with stable releases for the versions we need.
-	ssh-agent bash -c "ssh-add $INITIAL/ssh/cftp_deploy_id_rsa; composer install --prefer-dist"
+	#ssh-agent bash -c "ssh-add $INITIAL/ssh/cftp_deploy_id_rsa; composer install --prefer-dist"
 
-	echo "Clean all the version control directories out of the build directory…"
+	#echo "Clean all the version control directories out of the build directory…"
 	# Remove all version control directories
-	find $BUILD/public_html -name ".svn" -exec rm -rf {} \; 2> /dev/null
-	find $BUILD/public_html -name ".git*" -exec rm -rf {} \; 2> /dev/null
+	#find $BUILD/public_html -name ".svn" -exec rm -rf {} \; 2> /dev/null
+	#find $BUILD/public_html -name ".git*" -exec rm -rf {} \; 2> /dev/null
 
-	echo "Removing the perfidious Hello Dolly (banned on WPEngine)"
-	rm $BUILD/public_html/wp-content/plugins/hello.php
+	#echo "Removing the perfidious Hello Dolly (banned on WPEngine)"
+	#rm $BUILD/public_html/wp-content/plugins/hello.php
 
 	echo "Copying files to the package directory…"
-	rm -rf $PACKAGE/*
-	cp -pr public_html/* $PACKAGE/
-	cp -prv public_html/.[a-zA-Z0-9]* $PACKAGE
+	cp -pr $INITIAL/public_html/wp/* $PACKAGE/
+	rm -rf $PACKAGE/wp-content
+	cp -prv $INITIAL/public_html/wp-content $PACKAGE
 
 	# Use a relevant .gitignore
 	cp $INITIAL/.gitignore.wpengine $PACKAGE/.gitignore
@@ -157,8 +167,8 @@
 	# TIDY UP
 	# =======
 
-	rm -rf $BUILD
-	echo -e "${GREEN}The site was built using the 'composer install' command, from 'composer.lock', and turned into a Git commit.${NC}"
+	#rm -rf $BUILD
+	#echo -e "${GREEN}The site was built using the 'composer install' command, from 'composer.lock', and turned into a Git commit.${NC}"
 	echo -e "${GREEN}Please examine the commit in the package directory ($PACKAGE) and push it to WP Engine if it is correct.${NC}"
 	echo -e "${GREEN}You can delete the package directory after you're done.${NC}"
 	exit 0 # Success!

@@ -1,13 +1,13 @@
 #!/bin/bash
 # Just a human readable description of this site
-SITE_NAME="joeydeploy"
+SITE_NAME="site-name"
 # The name (to be) used by MySQL for the DB
-DB_NAME="joeydeploy"
+DB_NAME="site-name"
 # Values for searching and replacing
-SEARCHDOMAIN="joeydeploy.wpengine.com"
-REPLACEDOMAIN="local.joeydeploy"
+SEARCHDOMAIN="site-name.wpengine.com"
+REPLACEDOMAIN="local.site-name"
 # Site URL
-SITE_URL="http://local.joeydeploy"
+SITE_URL="http://local.site-name"
 # Wordpress multisite network (true/false)
 MULTISITE=false
 # Append additional config to wp-config.php

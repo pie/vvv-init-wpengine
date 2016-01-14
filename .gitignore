@@ -1,22 +1,10 @@
 build
 package
-
-## START WordPress show/ignore
-## So we don't get the core files in git
-
-# DO ignore public_html…
-public_html/*.*
-public_html/*/*
-
-# …except do NOT ignore
-!public_html/wp-content/mu-plugins/*.php
-!public_html/wp-content/*.php
-
-# … except DO ignore
-public_html/wp-content/*/*
-public_html/wp-content/mu-plugins/*/*
-public_html/wp-content/db.php
-public_html/wp-content/index.php
-public_html/wp-content/object-cache.php
-
-# END WordPress show/ignore
+public_html/wp
+public_html/wp-config.php
+public_html/wp-content/mu-plugins/force-strong-passwords
+public_html/wp-content/mu-plugins/wpengine-common
+public_html/wp-content/mu-plugins/stop-long-comments.php
+public_html/wp-content/mu-plugins/mu-plugin.php
+public_html/wp-content/mu-plugins/slt-force-strong-passwords.php
+public_html/wp-content/uploads

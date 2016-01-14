@@ -9,3 +9,10 @@ public_html/wp-content/mu-plugins/mu-plugin.php
 public_html/wp-content/mu-plugins/slt-force-strong-passwords.php
 public_html/wp-content/uploads
 public_html/wp-content/vendor
+public_html/wp-content/blogs.dir/
+public_html/wp-content/upgrade/*
+public_html/wp-content/backup-db/*
+public_html/wp-content/advanced-cache.php
+public_html/wp-content/wp-cache-config.php
+public_html/wp-content/cache/*
+public_html/wp-content/cache/supercache/*

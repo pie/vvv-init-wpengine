@@ -30,7 +30,6 @@
         "wpackagist-plugin/debug-bar": "*"
     },
     "extra": {
-        "wordpress-install-dir": "public_html/wp/",
         "installer-paths": {
             "public_html/wp-content/plugins/{$name}/": [
                 "type:wordpress-plugin"

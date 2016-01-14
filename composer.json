@@ -21,7 +21,6 @@
     },
     "require": {
         "php": ">=5.3.2",
-        "johnpbloch/wordpress": "4.x",
         "wpackagist-theme/twentyfifteen": "@stable"
     },
     "require-dev": {
